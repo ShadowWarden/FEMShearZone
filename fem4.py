@@ -48,11 +48,11 @@ def Q(e):
 def K(e):
 	return 0.5*det(e)*dot(dot(B(e).T,D(e)),B(e))
 
-x=loadtxt("case3.x")
-y=loadtxt("case3.y")
-elem=loadtxt("case3.elem")
+x=loadtxt("case6.x")
+y=loadtxt("case6.y")
+elem=loadtxt("output.txt")
 # boundary q data: node-id q_x q_y
-qb=loadtxt("case3.qb")
+qb=loadtxt("case6.qb")
 N=len(elem)
 n=len(x)
 e=zeros((N,3))
@@ -98,12 +98,6 @@ for i in range(len(elem)):
 	k[meshgrid(ii,ii)]+=K(elem[i])
 
 	print "Iteration no. %d" % (i)
-	for i in range(2*n):
-		print "%2d: " % i,
-		for j in range(2*n):
-			print "%5.2f " % (k[i][j]),
-		print ";"
-
 # find rows corresponding to boundary nodes
 m=2*len(qb[:,0])
 nb=zeros(m,dtype="int")
@@ -124,26 +118,8 @@ print ni
 
 krest=k[ni,:]
 
-for i in range(len(ni)):
-  print "%2d: " % i,
-  for j in range(2*n):
-    print "%5.2f " % (krest[i][j]),
-  print ";"
-
-
 kk=krest[:,ni]
-for i in range(len(ni)):
-  print "%2d: " % i,
-  for j in range(len(ni)):
-    print "%5.2f " % (kk[i][j]),
-  print ";"
 rs=-krest[:,nb]
-for i in range(len(ni)):
-  print "%2d: " % i,
-  for j in range(len(nb)):
-    print "%5.2f " % (rs[i][j]),
-  print ";"
-
 rest=dot(rs,qb[:,1:].flatten())
 
 print rest

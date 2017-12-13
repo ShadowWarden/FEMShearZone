@@ -185,7 +185,7 @@ for i in range(N):
   # otriag(n0[i],n1[i],n2[i])
   rtriag(n0[i],n1[i],n2[i])
 
-ylim([-0.2,0.2])
+ylim([-0.5,0.5])
 xlabel(r"$x\rightarrow$")
 ylabel(r"$y\rightarrow$")
 # title(r"Plot of Principal stress in the distorted mesh");
